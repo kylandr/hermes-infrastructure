@@ -211,7 +211,60 @@ compilar y produce los mismos 6 HTML: el repositorio es autocontenido y
 
 ---
 
-## 7. Contenido de este repositorio
+## 7. Propuesta abierta: una sección nueva en la página de routing
+
+La demo incluye una propuesta real de cambio, **sin fusionar**, para enseñar el
+ciclo completo: rama, compilación, diff y decisión.
+
+![Sección «Verificación antes de publicar» compilada desde la rama](evidencia/demo-propuesta-routing.png)
+
+| Dato | Valor |
+|------|-------|
+| Rama | `propuesta/verificacion-routing-routeros7` |
+| Alcance | 1 archivo, `site/wiki/mikrotik/routing.md` (+19 −1) |
+| Contenido | comandos de comprobación de la tabla de rutas, criterio de diagnóstico y aviso de que los ejemplos BGP están sin verificar |
+| Estado | **Pendiente de revisión**, no fusionada a `main` |
+
+### Qué se verificó al compilarla
+
+No se asumió: se compiló **desde la rama** y se sirvió con el servidor de
+previsualización.
+
+```
+$ npx vitepress build          # desde la rama
+build complete in 2.59s.       # 6 HTML generados
+
+$ npx vitepress preview
+/                       -> 200      /wiki/pfsense/vlans     -> 200
+/guia/flujo-de-cambios  -> 200      /wiki/hermes/agentes-ia -> 200
+/wiki/mikrotik/routing  -> 200
+
+$ curl -s .../wiki/mikrotik/routing | grep verificacion-antes-de-publicar
+id="verificacion-antes-de-publicar"      # la sección existe en el HTML
+```
+
+Y la contraprueba, para que no haya duda de dónde vive el cambio:
+
+```
+$ git switch main && npx vitepress build && npx vitepress preview
+/wiki/mikrotik/routing -> 200
+# "Verificación antes de publicar" no aparece: la propuesta sigue solo en la rama
+```
+
+También se comprobó que el árbol completo (incluida la rama) compila desde un
+clon limpio. El diff y el registro de la comprobación están en
+`evidencia/propuesta-routing.diff` y `evidencia/propuesta-verificacion-routing.md`.
+
+### Por qué los comandos de RouterOS se quedan en la rama
+
+Los comandos (`/routing/route/print`, `/ip/route/print`, `/routing/table/print`)
+provienen de la documentación de RouterOS 7, pero **no se ejecutaron en un
+router del laboratorio**. Mientras eso no ocurra, la sección no se fusiona: la
+propuesta queda como material de revisión, no como procedimiento publicado.
+
+---
+
+## 8. Contenido de este repositorio
 
 ```
 .
@@ -242,7 +295,7 @@ npx vitepress preview  # http://localhost:4173, necesario con cleanUrls
 
 ---
 
-## 8. Qué **no** está en este repositorio
+## 9. Qué **no** está en este repositorio
 
 - Credenciales, tokens, `.env`, `auth.json` ni configuración real del agente.
 - Direcciones internas (IP de la malla privada, nombres de host, puertos de
@@ -257,7 +310,23 @@ Detalle y criterio en `docs/ALCANCE.md` y la lista de archivos en
 
 ---
 
-## 9. Licencia
+## 10. Créditos y nombres de terceros
+
+- **Hermes Agent** (Nous Research): plataforma de agentes sobre la que corre el
+  sistema. No se incluye su código; las habilidades que trae se excluyeron.
+- **VitePress**: generador del sitio. Dependencia declarada en `site/package.json`.
+- **Google Flow MCP**: proyecto de terceros bajo licencia MIT, autor
+  **Mitansh Prajapati** (`Mitanshp5`), con aportes de `madzabreu`. Se evaluó y se
+  documentó, pero **no se copia** su código en este repositorio.
+- Repositorios relacionados evaluados y descartados para esta demo: `GTAI-1/flow-mcp`
+  (licencia ISC) y `kodelyx/flow-agent`.
+- Los fabricantes y productos que aparecen en las páginas de la wiki (pfSense,
+  Cisco, Huawei, MikroTik, Aruba, Docker, Zabbix, GLPI, Windows Server) son
+  marcas de sus respectivos titulares y se citan solo como tema documentado.
+
+---
+
+## 11. Licencia
 
 **Pendiente de decisión, no resuelta en este borrador.** El proyecto original
 era privado y declaraba "uso personal", así que no hay licencia pública
