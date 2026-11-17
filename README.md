@@ -24,11 +24,14 @@ Tres afirmaciones, cada una con su evidencia en el repositorio:
    existió, no como automatización que hoy corre.
 
 ```bash
-gh repo clone kylandr/hermes-infrastructure
+git clone https://github.com/kylandr/hermes-infrastructure.git
 cd hermes-infrastructure/site && npm ci
 npx vitepress build        # 6 HTML en .vitepress/dist
 npx vitepress preview      # 5 rutas con 200
 ```
+
+El repositorio es privado: el clon pide credenciales. Con `gh auth login` y
+`gh auth setup-git`, el clon por HTTPS funciona sin configurar nada más.
 
 ### Una distinción que este repositorio mantiene explícita
 
