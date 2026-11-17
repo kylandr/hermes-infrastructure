@@ -2,7 +2,7 @@
 title: "Routing MikroTik"
 tags: [mikrotik]
 created: 2026-10-05
-updated: 2026-10-05
+updated: 2026-11-16
 sources: ["https://manual.mikrotik.com/docs/routeros/routing/"]
 ---
 
@@ -161,6 +161,24 @@ Configura rutas estáticas, RIPv2, OSPF y BGP.
 
 ## Route topology
 - Visualize network topology.
+
+## Verificación antes de publicar
+
+Antes de documentar un cambio de enrutamiento, confirma el estado real en el
+equipo:
+
+```bash
+/routing/route/print where active=yes
+/ip/route/print detail
+/routing/table/print
+```
+
+- La tabla activa debe mostrar la ruta esperada con su gateway y su distancia.
+- Si la ruta no aparece como activa, el problema suele estar en el gateway o en
+  la interfaz, no en la regla de firewall.
+- En RouterOS 7 la configuración de BGP vive bajo `/routing/bgp`. Los ejemplos
+  de BGP de esta página usan sintaxis de versiones anteriores y quedan
+  **pendientes de verificar** antes de aplicarlos en producción.
 
 ## Enlaces
 - [Routing Guide](https://manual.mikrotik.com/docs/routeros/routing/)
