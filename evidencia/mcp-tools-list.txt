@@ -1,0 +1,33 @@
+# Prueba del MCP de Google Flow — 2026-11-16T22:29:06-05:00
+# Fuente: ~/Proyectos/activos/flow-studio-mcp (fork MIT de Mitanshp5/Google-Flow_MCP)
+
+## Handshake MCP por stdio (initialize + tools/list)
+initialize -> {"name": "flow-studio-mcp", "version": "2.0.0"} | protocolo 2024-11-05
+tools/list -> 16 herramientas
+  - flow_animate_card_to_video
+  - flow_produce_multishot_sequence
+  - flow_assemble_full_story
+  - flow_create_characters_parallel
+  - flow_generate_talking_clip
+  - flow_master_reel
+  - flow_render_motion_graphics
+  - flow_inspect_clips
+  - flow_render_hyperframes
+  - flow_build_viral_showcase
+  - flow_connect
+  - flow_list_projects
+  - flow_status
+  - flow_generate_image
+  - flow_export_reel
+  - flow_use_grid_architect
+
+## Pruebas unitarias
+$ npx vitest run tests/sanitize.test.js tests/pure-gaps.test.js
+ ✓ tests/sanitize.test.js (9 tests) 4ms
+ ✓ tests/pure-gaps.test.js (6 tests) 3ms
+ Test Files  2 passed (2)
+      Tests  15 passed (15)
+
+## No ejecutado
+- Suite completa (>180 s, requiere sesión de Chrome autenticada en Google Flow)
+- Generación real de imágenes/vídeo (consume créditos)

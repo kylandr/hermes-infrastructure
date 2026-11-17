@@ -1,0 +1,14 @@
+{
+  "name": "hermes-infrastructure-demo",
+  "private": true,
+  "type": "module",
+  "description": "Demo local de la wiki Hermes Infrastructure con VitePress",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}

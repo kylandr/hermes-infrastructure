@@ -1,0 +1,19 @@
+# Comprobación HTTP de la demo (VitePress preview)
+# Fecha: 2026-11-16T22:29:06-05:00
+# Servidor: vitepress preview en 127.0.0.1:8100
+
+/                                -> 200
+/guia/flujo-de-cambios           -> 200
+/wiki/mikrotik/routing           -> 200
+/wiki/pfsense/vlans              -> 200
+/wiki/hermes/agentes-ia          -> 200
+
+# Páginas generadas:
+site/.vitepress/dist/404.html
+site/.vitepress/dist/guia/flujo-de-cambios.html
+site/.vitepress/dist/index.html
+site/.vitepress/dist/wiki/hermes/agentes-ia.html
+site/.vitepress/dist/wiki/mikrotik/routing.html
+site/.vitepress/dist/wiki/pfsense/vlans.html
+
+# Tamaño: 1,3M

@@ -1,0 +1,21 @@
+# Dependencias y artefactos de compilación
+node_modules/
+site/.vitepress/dist/
+site/.vitepress/cache/
+
+# Secretos: nunca deben existir aquí
+.env
+.env.*
+auth.json
+config.yaml
+*.key
+*.pem
+
+# Estado y registros
+*.log
+!evidencia/*.log
+sessions/
+caches/
+
+# Sistema
+.DS_Store
