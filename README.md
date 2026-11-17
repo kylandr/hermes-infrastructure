@@ -1,9 +1,8 @@
 # Hermes Infrastructure
 
-**Demo reproducible de documentación técnica asistida por IA**: una wiki
-VitePress con tres páginas seleccionadas de las 139 del sistema real, el flujo
-con el que un agente propone un cambio y un humano lo revisa antes de publicar,
-y el respaldo versionado de ese contenido.
+**Demo reproducible de una wiki técnica construida con VitePress y documentada
+con asistencia de IA. Incluye tres páginas de muestra, una propuesta de cambio
+verificada en su propia rama y el registro histórico del respaldo automatizado.**
 
 Autor: **Stiven Polania — aprendiz del Tecnólogo en Gestión de Redes de Datos
 del SENA**.
@@ -30,8 +29,9 @@ npx vitepress build        # 6 HTML en .vitepress/dist
 npx vitepress preview      # 5 rutas con 200
 ```
 
-El repositorio es privado: el clon pide credenciales. Con `gh auth login` y
-`gh auth setup-git`, el clon por HTTPS funciona sin configurar nada más.
+El repositorio es público: el clon funciona sin cuenta ni credenciales. Si
+prefieres `gh`, `gh repo clone kylandr/hermes-infrastructure` hace lo mismo
+(con `gh` instalado, ese comando usa SSH y requiere una clave configurada).
 
 ### Una distinción que este repositorio mantiene explícita
 
