@@ -1,11 +1,43 @@
 # Hermes Infrastructure
 
-Infraestructura personal de documentación técnica y agentes de IA: una wiki
-VitePress de redes y sistemas (presentada aquí como **demo verificada**), un
-agente que la redacta y la publica, y un mecanismo de respaldo versionado.
+**Demo reproducible de documentación técnica asistida por IA**: una wiki
+VitePress con tres páginas seleccionadas de las 139 del sistema real, el flujo
+con el que un agente propone un cambio y un humano lo revisa antes de publicar,
+y el respaldo versionado de ese contenido.
 
 Autor: **Stiven Polania — aprendiz del Tecnólogo en Gestión de Redes de Datos
 del SENA**.
+
+## Qué puedes verificar aquí
+
+Tres afirmaciones, cada una con su evidencia en el repositorio:
+
+1. **Compila desde un clon limpio.** `git clone` + `npm ci` + `vitepress build`
+   producen 6 páginas HTML y las 5 rutas de la demo responden 200. No hay
+   dependencias locales ni pasos que solo funcionen en mi máquina.
+2. **La propuesta está probada en su rama.** Un cambio real de documentación
+   vive en `propuesta/verificacion-routing-routeros7`: compila, se sirve y la
+   sección aparece en el HTML. En `main` no está, y por eso sigue siendo una
+   propuesta.
+3. **El respaldo automático es histórico.** El último respaldo automático es del
+   6 de octubre de 2026. Se documenta como diseño y como registro de lo que
+   existió, no como automatización que hoy corre.
+
+```bash
+gh repo clone kylandr/hermes-infrastructure
+cd hermes-infrastructure/site && npm ci
+npx vitepress build        # 6 HTML en .vitepress/dist
+npx vitepress preview      # 5 rutas con 200
+```
+
+### Una distinción que este repositorio mantiene explícita
+
+**Que la página compile no prueba los comandos.** La compilación demuestra que el
+Markdown es válido, que el frontmatter se respeta y que el sitio se genera; no
+ejecuta nada en un equipo. Los comandos de RouterOS de la propuesta se probaron
+solo contra la documentación oficial y **falta ejecutarlos en un router del
+laboratorio**: por eso la rama no se fusiona. Cada afirmación del repositorio
+dice cuál de las dos cosas se comprobó.
 
 ---
 
@@ -130,16 +162,16 @@ respaldo privado no refleja el estado actual del sistema.
 | Wiki publicada (VitePress) | **Funciona** | `wiki-server` activo; `GET /wiki/` → HTTP 200; 139 páginas `.md` |
 | Generación de índices + compilación (`rebuild.sh`) | **Funciona** | script presente en el servidor de la wiki; recompila y reinicia el servicio |
 | Agente que redacta y publica | **Funciona** | un cron semanal de novedades existe y se dispara (última ejecución intentada 2026-11-16) |
-| Respaldo automático diario | **Detenido** | último commit de respaldo 2026-10-06 03:34 UTC; no existe el script `hermes-backup.sh` en el VPS ni un cron de respaldo en la lista actual |
+| Respaldo automático diario | **Histórico (detenido)** | último commit de respaldo 2026-10-06 03:34 UTC; no existe el script `hermes-backup.sh` en el VPS ni un cron de respaldo en la lista actual |
 | Sincronización estación ↔ VPS cada 2 min | **No presente** | no hay `~/wiki` ni temporizador de sincronización en la estación; el flujo descrito no corre |
 | Revisión previa de cambios | **No implementada** | el agente escribe y hace commit directo, sin rama ni aprobación; la revisión ocurre después, con `git diff`. Ver `docs/FLUJO-DOCUMENTACION.md` |
 | Integración MCP de Google Flow | **En evaluación** | handshake y pruebas parciales superadas; falta una ejecución completa desde Hermes. Ver `docs/MCP-GOOGLE-FLOW.md` |
 | Configuración de VitePress dentro del respaldo | **Ausente** | el respaldo no incluye `.vitepress/`: solo el contenido y `rebuild.sh`. El sitio privado compila con una configuración que vive únicamente en el servidor |
 
-En corto: **el respaldo diario se detuvo el 6 de octubre de 2026**, la
-sincronización automática no está instalada y no existe una revisión previa al
-commit. Las tres piezas se describen en este repositorio como diseño, no como
-automatización activa.
+En corto: **el respaldo diario es histórico** —funcionó hasta el 6 de octubre de
+2026 y no volvió a ejecutarse—, la sincronización automática no está instalada y
+no existe una revisión previa al commit. Las tres piezas se describen como
+diseño y como registro, no como automatización activa.
 
 ---
 
@@ -255,12 +287,19 @@ También se comprobó que el árbol completo (incluida la rama) compila desde un
 clon limpio. El diff y el registro de la comprobación están en
 `evidencia/propuesta-routing.diff` y `evidencia/propuesta-verificacion-routing.md`.
 
-### Por qué los comandos de RouterOS se quedan en la rama
+### Compilar la página no es probar los comandos
+
+Son dos comprobaciones distintas y el repositorio no las mezcla:
+
+| Comprobación | Qué demuestra | Estado |
+|--------------|---------------|--------|
+| Compilación de la página (rama) | el Markdown es válido, el frontmatter se respeta y el sitio se genera con la sección nueva | **Hecha** |
+| Ejecución de los comandos en RouterOS 7 | que la ruta aparece como activa y el diagnóstico es correcto en un equipo real | **Pendiente** |
 
 Los comandos (`/routing/route/print`, `/ip/route/print`, `/routing/table/print`)
-provienen de la documentación de RouterOS 7, pero **no se ejecutaron en un
-router del laboratorio**. Mientras eso no ocurra, la sección no se fusiona: la
-propuesta queda como material de revisión, no como procedimiento publicado.
+provienen de la documentación oficial de RouterOS 7, pero **no se ejecutaron en
+un router del laboratorio**. Mientras eso no ocurra, la sección no se fusiona:
+la propuesta queda como material de revisión, no como procedimiento publicado.
 
 ---
 
