@@ -1,5 +1,5 @@
 # Comprobación de la propuesta
-# Rama: propuesta/verificacion-routing-routeros7 @ bfb05f4 (base: main @ 65cf4dd)
+# Rama: propuesta/verificacion-routing-routeros7 (compilada desde el HEAD de la rama)
 # Fecha: 2026-11-16T22:36:38-05:00
 
 /                              -> 200

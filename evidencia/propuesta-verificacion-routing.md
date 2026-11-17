@@ -20,7 +20,7 @@ quien use la página pueda confirmar el estado del equipo antes de aplicar algo.
 | Dato | Valor |
 |------|-------|
 | Rama | `propuesta/verificacion-routing-routeros7` |
-| Commit | `bfb05f4` (base `main` = `65cf4dd`) |
+| Commit | el HEAD de la rama (`git rev-parse --short propuesta/verificacion-routing-routeros7`); el hash cambia si la rama se rebasa |
 | Archivos tocados | 1: `site/wiki/mikrotik/routing.md` (+19 −1) |
 | Estado | **Pendiente de revisión**, sin fusionar |
 

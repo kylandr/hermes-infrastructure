@@ -10,7 +10,7 @@ repositorio no tiene remoto y los tres commits viven solo en disco.
 |----------|----------|-----------|
 | Archivos rastreados | 28 | Compartibles salvo las decisiones de §4 |
 | Capturas de pantalla | 4 | Las 4 compartibles, sin edición |
-| Commits | 3 en `main` + 1 en la rama de propuesta | Compartibles; autoría ya normalizada |
+| Commits | 4 en `main` + 1 en la rama de propuesta | Compartibles; autoría ya normalizada |
 | Secretos, IPs de malla, teléfonos, correos | 0 hallazgos | Compartible |
 
 ## 2. Archivos
@@ -52,13 +52,18 @@ Si se prefiere un paquete más ligero, las tres primeras son opcionales: el
 ## 4. Commits visibles
 
 ```
-bfb05f4  propuesta: verificación de rutas antes de publicar en RouterOS 7   (rama)
-65cf4dd  fix(site): enlaces relativos en portada y página de agentes
-9b74938  docs: demo verificada, estado del respaldo y MCP en evaluación
-5d422c0  Borrador público de Hermes Infrastructure
+(rama)   propuesta: verificación de rutas antes de publicar en RouterOS 7
+(main)   evidencia: propuesta de routing y auditoría de visibilidad
+(main)   fix(site): enlaces relativos en portada y página de agentes
+(main)   docs: demo verificada, estado del respaldo y MCP en evaluación
+(main)   Borrador público de Hermes Infrastructure
 ```
 
-Autor y committer en los cuatro: `Stiven Polania <kylandr@users.noreply.github.com>`.
+Se citan por asunto y no por hash: cualquier `rebase` o `amend` sobre el
+borrador cambia los identificadores. Para verlos:
+`git log --oneline --graph --all --decorate`.
+
+Autor y committer en los cinco: `Stiven Polania <kylandr@users.noreply.github.com>`.
 No aparece el correo local, ni el nombre de la máquina, ni rutas del sistema: el
 historial nuevo se creó con identidad explícita en cada commit.
 
