@@ -93,11 +93,21 @@ Ver detalle del criterio en `docs/ALCANCE.md`.
 pasan en 2 archivos. Suite completa no terminada (>180 s, requiere navegador
 autenticado). Registro en `mcp-tools-list.txt`.
 
-## 8. Pendiente antes de publicar
+## 8. Propuesta de cambio (demo del flujo)
 
-1. Elegir licencia (no se incluyó `LICENSE` a propósito).
-2. Decidir si se publican las capturas de pantalla (contienen solo la demo).
-3. Confirmar que el nombre del repositorio público sea `hermes-infrastructure`.
-4. Decidir si se añade una página de índice de la wiki original o solo la demo.
-5. Reparar el respaldo detenido y el `rebuild.sh` desactualizado del repo
-   privado (fuera del alcance de este borrador, pero señalado).
+Se generó un cambio real en la rama `propuesta/verificacion-routing-routeros7`
+(base `main` = `65cf4dd`, commit `bfb05f4`): una sección nueva en la página de
+routing de MikroTik. Compilada desde la rama: build correcto y 5 rutas con 200.
+Detalle, diff y checklist en `propuesta-verificacion-routing.md`. La rama **no**
+se fusionó.
+
+## 9. Pendiente antes de publicar
+
+Las decisiones abiertas están en `docs/REVISION.md` §5. Resumen:
+
+1. Licencia (no se incluyó `LICENSE` a propósito).
+2. Nombres de terceros en el informe del MCP (mantener atribución o reducir).
+3. Publicar o no las tres capturas generales.
+4. La propuesta de routing no se probó en un router real: publicar como
+   procedimiento citado o esperar verificación en laboratorio.
+5. Crear el remoto `hermes-infrastructure` y elegir visibilidad.
