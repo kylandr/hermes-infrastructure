@@ -1,8 +1,8 @@
 # Hermes Infrastructure
 
 Infraestructura personal de documentación técnica y agentes de IA: una wiki
-VitePress de redes y sistemas, un agente que la redacta y la publica, y un
-mecanismo de respaldo versionado.
+VitePress de redes y sistemas (presentada aquí como **demo verificada**), un
+agente que la redacta y la publica, y un mecanismo de respaldo versionado.
 
 Autor: **Stiven Polania — aprendiz del Tecnólogo en Gestión de Redes de Datos
 del SENA**.
@@ -99,7 +99,8 @@ Capas:
 ## 4. Hitos (fechas respaldadas por Git)
 
 Todas las fechas provienen de commits reales; la columna *Evidencia* indica
-dónde verificarlas.
+dónde verificarlas. **Primer respaldo documentado: 5 de octubre de 2026**
+(creación del repositorio de respaldo a las 16:14 UTC).
 
 | Fecha | Hito | Evidencia |
 |-------|------|-----------|
@@ -118,20 +119,27 @@ El repositorio de respaldo no contiene nada posterior a esa fecha.
 
 ---
 
-## 5. Estado real: qué funciona y qué solo está documentado
+## 5. Estado comprobado: respaldo, sincronización y revisión
 
-Verificado el 2026-11-16 contra el entorno en ejecución.
+Verificado el 2026-11-16 contra el entorno en ejecución. Se separa lo que
+**funciona** de lo que solo está **documentado** o quedó **detenido**, porque el
+respaldo privado no refleja el estado actual del sistema.
 
 | Pieza | Estado | Comprobación |
 |-------|--------|--------------|
 | Wiki publicada (VitePress) | **Funciona** | `wiki-server` activo; `GET /wiki/` → HTTP 200; 139 páginas `.md` |
 | Generación de índices + compilación (`rebuild.sh`) | **Funciona** | script presente en el servidor de la wiki; recompila y reinicia el servicio |
 | Agente que redacta y publica | **Funciona** | un cron semanal de novedades existe y se dispara (última ejecución intentada 2026-11-16) |
-| Respaldo automático diario | **Solo documentado / detenido** | último commit de respaldo 2026-10-06; no existe el script `hermes-backup.sh` en el VPS ni un cron de respaldo en la lista actual |
-| Sincronización estación ↔ VPS cada 2 min | **No presente** | no hay `~/wiki` ni temporizador de sincronización en la estación |
-| Revisión formal de cambios (rama/PR/aprobación) | **No implementada** | el agente escribe y hace commit directo; ver `docs/FLUJO-DOCUMENTACION.md` |
-| Servidor MCP de Google Flow | **Funciona como servidor** | `tools/list` responde con 16 herramientas; no está registrado en la configuración actual de Hermes |
+| Respaldo automático diario | **Detenido** | último commit de respaldo 2026-10-06 03:34 UTC; no existe el script `hermes-backup.sh` en el VPS ni un cron de respaldo en la lista actual |
+| Sincronización estación ↔ VPS cada 2 min | **No presente** | no hay `~/wiki` ni temporizador de sincronización en la estación; el flujo descrito no corre |
+| Revisión previa de cambios | **No implementada** | el agente escribe y hace commit directo, sin rama ni aprobación; la revisión ocurre después, con `git diff`. Ver `docs/FLUJO-DOCUMENTACION.md` |
+| Integración MCP de Google Flow | **En evaluación** | handshake y pruebas parciales superadas; falta una ejecución completa desde Hermes. Ver `docs/MCP-GOOGLE-FLOW.md` |
 | Configuración de VitePress dentro del respaldo | **Ausente** | el respaldo no incluye `.vitepress/`: solo el contenido y `rebuild.sh`. El sitio privado compila con una configuración que vive únicamente en el servidor |
+
+En corto: **el respaldo diario se detuvo el 6 de octubre de 2026**, la
+sincronización automática no está instalada y no existe una revisión previa al
+commit. Las tres piezas se describen en este repositorio como diseño, no como
+automatización activa.
 
 ---
 
@@ -180,6 +188,27 @@ Test Files  2 passed (2)
 
 Comandos reproducibles y su salida completa están en `evidencia/`.
 
+### Demo VitePress verificada
+
+La demo no se describe: se compiló y se sirvió.
+
+```
+$ npx vitepress build
+vitepress v1.6.4
+✓ building client + server bundles...
+✓ rendering pages...
+build complete in 2.20s.
+
+$ npx vitepress preview --port 8100
+/                       -> 200      /wiki/pfsense/vlans     -> 200
+/guia/flujo-de-cambios  -> 200      /wiki/hermes/agentes-ia -> 200
+/wiki/mikrotik/routing  -> 200
+```
+
+Además, un clon limpio del repositorio (`git clone` + `npm ci`) vuelve a
+compilar y produce los mismos 6 HTML: el repositorio es autocontenido y
+`.gitignore` no oculta nada necesario. Capturas en `evidencia/`.
+
 ---
 
 ## 7. Contenido de este repositorio
@@ -190,14 +219,15 @@ Comandos reproducibles y su salida completa están en `evidencia/`.
 ├── docs/
 │   ├── ARQUITECTURA.md          # diseño del sistema (versión pública)
 │   ├── FLUJO-DOCUMENTACION.md   # propuesta → revisión → publicación
-│   ├── MCP-GOOGLE-FLOW.md       # hallazgo, origen, licencia, cambios, prueba
+│   ├── MCP-GOOGLE-FLOW.md       # integración en evaluación
+│   ├── REVISION.md              # qué se comparte y qué requiere edición
 │   └── ALCANCE.md               # qué se excluyó y por qué
-├── site/                        # demo local de la wiki (VitePress)
+├── site/                        # demo VitePress verificada
 │   ├── .vitepress/config.mjs
 │   ├── index.md
 │   ├── guia/flujo-de-cambios.md
 │   └── wiki/{hermes,mikrotik,pfsense}/*.md
-└── evidencia/                   # compilación y pruebas
+└── evidencia/                   # compilación, pruebas y propuesta de cambio
 ```
 
 Cómo ver la demo:
@@ -207,6 +237,7 @@ cd site
 npm install
 npx vitepress dev      # http://localhost:5173
 npx vitepress build    # salida en .vitepress/dist
+npx vitepress preview  # http://localhost:4173, necesario con cleanUrls
 ```
 
 ---
@@ -228,7 +259,18 @@ Detalle y criterio en `docs/ALCANCE.md` y la lista de archivos en
 
 ## 9. Licencia
 
-**Pendiente de decisión.** El proyecto original era privado y no incluía
-licencia pública. Este borrador no impone una: antes de publicar hay que
-elegir una (por ejemplo MIT para el texto y la configuración, manteniendo el
-código de terceros bajo su licencia original). Ver `docs/ALCANCE.md`.
+**Pendiente de decisión, no resuelta en este borrador.** El proyecto original
+era privado y declaraba "uso personal", así que no hay licencia pública
+heredable. Este repositorio **no incluye archivo `LICENSE`** a propósito: la
+elección es del autor.
+
+Opciones sobre la mesa:
+
+| Opción | Alcance | Efecto |
+|--------|---------|--------|
+| MIT | texto, scripts y configuración propios | permite reutilización con atribución |
+| CC BY 4.0 (documentación) + MIT (scripts) | separa contenido y código | habitual en documentación técnica |
+| Sin licencia | todo | se puede leer, no reutilizar legalmente |
+
+El código de terceros (MCP de Google Flow) mantiene su licencia original. Ver
+`docs/ALCANCE.md` y `docs/REVISION.md` para el resto de decisiones abiertas.

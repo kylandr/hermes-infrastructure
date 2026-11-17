@@ -1,4 +1,14 @@
-# MCP de Google Flow: hallazgo, origen, cambios y prueba
+# MCP de Google Flow: integración en evaluación
+
+**Estado: en evaluación.** Handshake MCP aprobado y pruebas parciales superadas;
+falta verificar una ejecución completa lanzada desde Hermes.
+
+| Criterio | Estado |
+|----------|--------|
+| Handshake MCP (`initialize` + `tools/list`) | **Superado** — 16 herramientas |
+| Pruebas unitarias parciales (`vitest`, 2 archivos) | **Superadas** — 15/15 |
+| Suite completa de pruebas | **No completada** — depende de un navegador autenticado |
+| Ejecución de una tarea real desde Hermes | **Pendiente** — no está registrado en `mcp_servers` |
 
 Búsqueda realizada el 2026-11-16 en los directorios de proyectos, la
 configuración de Hermes y el VPS.
@@ -78,6 +88,12 @@ Conclusión: el servidor fue **construido y probado para Hermes** y se operó co
 un navegador dedicado, pero en la configuración actual no está dado de alta como
 servidor MCP. Para usarlo hoy hay que registrarlo (bloque de ejemplo en el
 README del proyecto) o lanzarlo por CLI.
+
+**Qué falta para cerrar la evaluación:** registrar el servidor en
+`mcp_servers`, lanzar una tarea pequeña desde Hermes (por ejemplo
+`flow_list_projects`, que no consume créditos), comprobar que las herramientas
+aparecen en la sesión del agente y guardar la transcripción como evidencia. Una
+generación real de vídeo queda fuera de alcance porque consume créditos.
 
 ## 5. Prueba reproducida
 
