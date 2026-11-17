@@ -195,8 +195,8 @@ autogpt --goal "Investiga las ultimas features de Kubernetes 1.37"
 ## Ver tambien
 
 - [Model Context Protocol](https://modelcontextprotocol.io)
-- [Automatizacion con IA](/guia/flujo-de-cambios)
-- [Modelos locales Ollama](/guia/flujo-de-cambios)
+- [Automatizacion con IA](../../guia/flujo-de-cambios.md)
+- [Modelos locales Ollama](../../guia/flujo-de-cambios.md)
 
 ## Fuentes oficiales
 
